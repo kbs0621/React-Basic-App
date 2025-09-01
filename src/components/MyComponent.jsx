@@ -15,12 +15,23 @@ class MyComponent extends Component {
       this.setState({
         value: this.state.value - 1
       })
-    };
+    }; //handleChange
+
+    handleChange = (e) => {
+        /*
+            message: e.target.value
+            username: e.target.value
+        */
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }; //handleChange
+
     render() {
         //destructuring assignment 
         const { name, age } = this.props;
         const { value, message, username } = this.state;
-        const { handleDecrement } = this;
+        const { handleDecrement, handleChange } = this;
 
         return (
             <div>
@@ -33,7 +44,9 @@ class MyComponent extends Component {
                 <button onClick={handleDecrement}>감소</button>
                 <br/>
                 <p>상태변수 message = {message}</p>
-                <input value={message} />
+                <input name="message" value={message} onChange={handleChange}/>
+                <p>상태변수 username = {username}</p>
+                <input name="username" value={username} onChange={handleChange}/>
             </div>
         );
     }
